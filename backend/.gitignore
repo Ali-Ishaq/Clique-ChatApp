@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Build output (if using TypeScript)
+dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Temporary files
+.DS_Store
+Thumbs.db
+
+# Optional npm cache directory
+.npm/
+
+# Yarn integrity file
+.yarn-integrity
+
+# Optional yarn cache
+.yarn/
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Other files
+*.tgz
+*.gz
+*.zip

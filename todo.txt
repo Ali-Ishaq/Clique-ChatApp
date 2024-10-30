@@ -1,0 +1,9 @@
+>Implement socket.io / Done                                 
+>make the code optimized by making api call for only required data /Done
+>Fix realtime chat bug /Fixed
+>handle realtime msgs from new conversations -> fix bug /fixed
+>Fix add user bugs/fixed
+>Adjust existing APIs to incorporate groupChat / Completed
+>Make Ui to create Group from frontend / Completed
+
+Remove unwanted consoles /pending
