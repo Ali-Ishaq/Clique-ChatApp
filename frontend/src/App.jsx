@@ -30,7 +30,7 @@ function App() {
     const persistentLogIn = async () => {
       try {
         const response = await fetch(
-          "https://clique-chat-app-server.vercel.app//user/persistent-login",
+          "https://clique-chat-app-server.vercel.app/user/persistent-login",
           { credentials: "include" }
         );
         const { status, message, data } = await response.json();

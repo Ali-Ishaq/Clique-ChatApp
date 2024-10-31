@@ -76,7 +76,7 @@ function CreateGroupPage({
       setIsRequestPending(true);
 
       const response = await fetch(
-        "https://clique-chat-app-server.vercel.app//messages/create-group-conversation",
+        "https://clique-chat-app-server.vercel.app/messages/create-group-conversation",
         {
           method: "POST",
           credentials: "include",

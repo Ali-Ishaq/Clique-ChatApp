@@ -14,7 +14,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const socket = io("https://clique-chat-app-server.vercel.app/", {
+      const socket = io("https://clique-chat-app-server.vercel.app", {
         query: {
           userId: user._id,
         },

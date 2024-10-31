@@ -25,7 +25,7 @@ function Login() {
     setApiLoading(true);
 
     const response = await fetch(
-      "https://clique-chat-app-server.vercel.app//user/login",
+      "https://clique-chat-app-server.vercel.app/user/login",
       {
         method: "POST",
         credentials: "include",
