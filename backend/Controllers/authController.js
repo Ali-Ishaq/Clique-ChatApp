@@ -58,7 +58,7 @@ const signUp = async (req, res) => {
       maxAge: 15 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure:true,
-      sameSite:none
+      sameSite:"none"
 
     });
 
@@ -112,7 +112,7 @@ const logIn = async (req, res) => {
       maxAge: 15 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure:true,
-      sameSite:none
+      sameSite: "none"
     });
 
     const responseData={...user._doc}
@@ -138,6 +138,7 @@ const logOut = async (req, res) => {
     
     res.clearCookie("token", {
       httpOnly: true,
+      secure:true
       
       // secure: process.env.NODE_ENV === "production", // Secure cookie in production
     });
