@@ -70,14 +70,19 @@ function Homepage() {
             })
           );
         } else {
-          fetch("http://192.168.0.128:3000/messages/get-conversation", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({conversationId:liveMessage.conversationId}),
-          })
+          fetch(
+            "https://clique-chat-app-server.vercel.app//messages/get-conversation",
+            {
+              method: "POST",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                conversationId: liveMessage.conversationId,
+              }),
+            }
+          )
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -86,20 +91,23 @@ function Homepage() {
             })
             .then(({ data, status }) => {
               if (status === "success") {
-                
                 setConversations((prev) => [
                   ...prev, // Spread the previous state
                   {
                     profile: "",
-                    conversationName: data.participants.length > 1?groupName:data.participants[0].username ,
-                    userId: data.participants.length > 1? data.participants.map((elem) => elem._id) : data.participants[0]._id,
+                    conversationName:
+                      data.participants.length > 1
+                        ? groupName
+                        : data.participants[0].username,
+                    userId:
+                      data.participants.length > 1
+                        ? data.participants.map((elem) => elem._id)
+                        : data.participants[0]._id,
                     lastMsg: data.messages[0].message.slice(0, 15) + "...",
                     lastUpdate: new Date(data.messages[0].createdAt),
                     conversationId: data._id,
                     unreadMessages: 1,
-                    isGroupConversation: data.participants.length > 1
-
-                    
+                    isGroupConversation: data.participants.length > 1,
                   },
                 ]);
                 sortConversations();
@@ -126,20 +134,16 @@ function Homepage() {
     }
   }, [user]);
 
-  
-
   const getConversations = async () => {
     try {
       const response = await fetch(
-        "http://192.168.0.128:3000/messages/get-conversations",
+        "https://clique-chat-app-server.vercel.app//messages/get-conversations",
         {
           method: "GET",
           credentials: "include",
         }
       );
       const { data } = await response.json();
-
-      
 
       if (data.length < 1) {
         setConversations([]);
@@ -148,7 +152,6 @@ function Homepage() {
           .map((elem) => {
             //remove conversation that has been created but not started
             if (!elem.lastMessage[0] && elem.participants.length < 2) {
-             
               return null;
             }
             if (elem.participants.length > 1) {
@@ -187,8 +190,6 @@ function Homepage() {
           })
           .filter((e) => e != null);
 
-        
-
         setConversations(conversationsTemplate);
       }
       sortConversations();
@@ -214,7 +215,7 @@ function Homepage() {
 
       // getting chat of selected conversation
       const response = await fetch(
-        "http://192.168.0.128:3000/messages/get-conversation-messages",
+        "https://clique-chat-app-server.vercel.app//messages/get-conversation-messages",
         {
           method: "POST",
           credentials: "include",
@@ -229,13 +230,9 @@ function Homepage() {
 
       setMessages(data);
       setIsChatLoading(false);
-
-      
     } catch (error) {
       console.log(error.message);
     }
-
-  
   };
 
   const handleSendMsgFieldChange = (e) => {
@@ -244,7 +241,7 @@ function Homepage() {
 
   const handleSendMsgFormSubmit = async (e, sentTime) => {
     e.preventDefault();
-    
+
     const conversationId = selectedCard.conversationId;
 
     const fetchBody = {
@@ -264,7 +261,7 @@ function Homepage() {
         ]);
 
         const res = await fetch(
-          "http://192.168.0.128:3000/messages/sendMessage",
+          "https://clique-chat-app-server.vercel.app//messages/sendMessage",
           {
             method: "POST",
             credentials: "include",
@@ -284,7 +281,7 @@ function Homepage() {
                 conversation.lastMsg = data.message.slice(0, 15) + "...";
                 conversation.lastUpdate = new Date(data.createdAt);
               }
-              
+
               return conversation;
             })
           );

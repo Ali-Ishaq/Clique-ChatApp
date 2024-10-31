@@ -18,29 +18,31 @@ const initialValues = {
 function Signup() {
   const [apiLoading, setApiLoading] = useState(false);
   const { setUser } = useContext(userContext);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const createUser = async (user) => {
     setApiLoading(true);
 
-    const response = await fetch("http://192.168.0.128:3000/user/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+    const response = await fetch(
+      "https://clique-chat-app-server.vercel.app//user/signup",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    );
 
     const { message, status, data } = await response.json();
     if (status == "success") {
       setUser(data);
-      navigate('/');
+      navigate("/");
     }
-   
+
     toast(message);
     setApiLoading(false);
-    
   };
 
   const { handleSubmit, errors, values, handleChange, handleBlur, touched } =

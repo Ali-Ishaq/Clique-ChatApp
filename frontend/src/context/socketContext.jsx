@@ -14,7 +14,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const socket = io("http://192.168.0.128:3000", {
+      const socket = io("https://clique-chat-app-server.vercel.app/", {
         query: {
           userId: user._id,
         },
@@ -22,13 +22,11 @@ export const SocketContextProvider = ({ children }) => {
       setSocket(socket);
 
       socket.on("getOnlineUsers", (users) => {
-       
         setOnlineUsers(users);
       });
 
       socket.on("getMessage", (newMessage) => {
         setLiveMessage({ ...newMessage, isSent: false });
-        
       });
 
       return () => {

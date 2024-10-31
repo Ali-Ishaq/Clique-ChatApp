@@ -17,31 +17,32 @@ const initialValues = {
 function Login() {
   const [apiLoading, setApiLoading] = useState(false);
 
-  const navigate =useNavigate()
-
+  const navigate = useNavigate();
 
   const { setUser } = useContext(userContext);
 
   const logInDb = async (credentials) => {
-    
     setApiLoading(true);
 
-    const response = await fetch("http://192.168.0.128:3000/user/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    });
+    const response = await fetch(
+      "https://clique-chat-app-server.vercel.app//user/login",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      }
+    );
 
     const { status, message, data } = await response.json();
     if (status == "success") {
       setUser(data);
-      
-      navigate('/')
+
+      navigate("/");
     }
-    
+
     setApiLoading(false);
     toast(message);
   };
@@ -59,7 +60,10 @@ function Login() {
     <div className="login-page auth-pages">
       <form className="signup-form" onSubmit={handleSubmit}>
         {/* <img className="card-bg-image" src="8093438.jpg" alt="" /> */}
-        <div className="card-bg-image"> <img src="authpage.png" alt="" /></div>
+        <div className="card-bg-image">
+          {" "}
+          <img src="authpage.png" alt="" />
+        </div>
         {/* <img className="card-bg-image" src="authpageBg.jpg" alt="" /> */}
         <div className="input-fields-container input-fields-container-login">
           <div className="input-field">

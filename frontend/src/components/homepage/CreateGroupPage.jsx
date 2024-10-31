@@ -38,7 +38,7 @@ function CreateGroupPage({
 
   const addGroupParticipants = (e, participantId, toAdd) => {
     e.stopPropagation();
-    
+
     if (participantId && !participants.includes(participantId) && toAdd) {
       setParticipants((prev) => [...prev, participantId]);
     } else if (
@@ -48,7 +48,6 @@ function CreateGroupPage({
     ) {
       setParticipants((prev) => prev.filter((user) => user != participantId));
     }
-
   };
 
   const handleGroupNameChange = (e) => {
@@ -77,7 +76,7 @@ function CreateGroupPage({
       setIsRequestPending(true);
 
       const response = await fetch(
-        "http://192.168.0.128:3000/messages/create-group-conversation",
+        "https://clique-chat-app-server.vercel.app//messages/create-group-conversation",
         {
           method: "POST",
           credentials: "include",

@@ -15,6 +15,8 @@ const Message = require("./Models/messageModel");
 const allowedOrigins = [
   "http://localhost:5173",
   "http://192.168.0.128:5173",
+  "https://clique-chat-app.vercel.app"
+
 ];
 
 app.use(cookieParser());
@@ -44,8 +46,6 @@ app.get("/", (req, res) => {
 });
 
 
-
-
 mongoose
   .connect(process.env.DB_URI)
   .then(() => {
@@ -59,7 +59,4 @@ mongoose
   });
 
 
-  
-// +92 3352770966
-// ijlalishaq2019@gmail.com
-
+ 

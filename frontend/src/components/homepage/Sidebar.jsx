@@ -27,14 +27,14 @@ function Sidebar({
 }) {
   const [userSearchResult, setUserSearchResult] = useState(null);
   const { socket } = useContext(socketContext);
-  const [selectedMenu,setSelectedMenu]=useState('option1')
+  const [selectedMenu, setSelectedMenu] = useState("option1");
 
   const conversationCardContainerRef = useRef();
   const sidebarNavMenuRef = useRef(null);
   const searchUserContainerRef = useRef();
   const searchUserInputRef = useRef();
   const menuDropDownRef = useRef();
-  const createGroupPageRef =useRef(null)
+  const createGroupPageRef = useRef(null);
 
   // Explanation below in createConversation Function
   const [newConversationId, setNewConversationId] = useState(null);
@@ -75,7 +75,7 @@ function Sidebar({
       sidebarNavMenuRef.current.style.display = "";
       searchUserContainerRef.current.style.display = "";
       setUserSearchResult(null);
-      setSelectedMenu('option1')
+      setSelectedMenu("option1");
     }, 50);
 
     e.target.value = "";
@@ -87,7 +87,6 @@ function Sidebar({
     clearTimeout(timeoutId);
 
     timeoutId = setTimeout(() => {
-    
       if (e.target.value.length < 1) {
         setUserSearchResult(null);
       }
@@ -100,20 +99,13 @@ function Sidebar({
   const createConversation = async (e, id) => {
     e.stopPropagation();
     try {
-     
-
       const doesConversationExist = conversations.find((conversation) => {
         return conversation.userId == id;
       });
 
-     
-      
-
       if (!doesConversationExist) {
-       
-
         const response = await fetch(
-          "http://192.168.0.128:3000/messages/create-conversation",
+          "https://clique-chat-app-server.vercel.app//messages/create-conversation",
           {
             method: "POST",
             credentials: "include",
@@ -125,11 +117,8 @@ function Sidebar({
         );
 
         const { status, message, data } = await response.json();
-        
-        if (status == "success") {
-          
-          
 
+        if (status == "success") {
           setConversations((prev) => [
             ...prev,
             {
@@ -154,7 +143,6 @@ function Sidebar({
           // in selectConversation function
         }
       } else {
-
         selectConversation(doesConversationExist.conversationId);
       }
 
@@ -166,9 +154,12 @@ function Sidebar({
 
   const handleLogOut = async () => {
     try {
-      const response = await fetch("http://192.168.0.128:3000/user/logout", {
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://clique-chat-app-server.vercel.app//user/logout",
+        {
+          credentials: "include",
+        }
+      );
       const { status, message } = await response.json();
       if (status == "success") {
         location.reload();
@@ -179,19 +170,17 @@ function Sidebar({
     }
   };
 
-  const handleMenuChange =(e)=>{
-    setSelectedMenu(e.target.value)
-  }
-
+  const handleMenuChange = (e) => {
+    setSelectedMenu(e.target.value);
+  };
 
   return (
     <div className="conversations-sidebar">
-
       <div className="sidebar-header">
         <h1>CLIQUE</h1>
-      
 
-        <div className="menu"
+        <div
+          className="menu"
           tabIndex="0"
           onFocus={() => {
             menuDropDownRef.current.style.display = "flex";
@@ -202,12 +191,20 @@ function Sidebar({
         >
           <TbDotsVertical size={"22px"} />
           <div className="menu-dropdown" ref={menuDropDownRef}>
-            <p onClick={()=>{createGroupPageRef.current.style.display='flex'; menuDropDownRef.current.style.display = "" ; setSelectedCard(null);setMessages(null)}}>New group</p>
+            <p
+              onClick={() => {
+                createGroupPageRef.current.style.display = "flex";
+                menuDropDownRef.current.style.display = "";
+                setSelectedCard(null);
+                setMessages(null);
+              }}
+            >
+              New group
+            </p>
             <p>Select chats</p>
             <p onClick={handleLogOut}>Log out</p>
           </div>
         </div>
-        
       </div>
 
       <div className="search-bar" tabIndex={"0"}>
@@ -220,8 +217,6 @@ function Sidebar({
           onChange={handleSearchUserChange}
           ref={searchUserInputRef}
         />
-
-       
 
         <div className="search-user-container" ref={searchUserContainerRef}>
           {userSearchResult && userSearchResult?.length > 0 ? (
@@ -255,7 +250,8 @@ function Sidebar({
         </div>
       </div>
 
-      <div className="conversation-cards-container"
+      <div
+        className="conversation-cards-container"
         ref={conversationCardContainerRef}
       >
         {conversations
@@ -300,54 +296,85 @@ function Sidebar({
             ))}
       </div>
 
-      <div className="sidebar-navigation-menu"  ref={sidebarNavMenuRef}>
-
-      
-        <div className={`chats ${selectedMenu=='option1' && 'selected-menu'}`}>
-        
+      <div className="sidebar-navigation-menu" ref={sidebarNavMenuRef}>
+        <div
+          className={`chats ${selectedMenu == "option1" && "selected-menu"}`}
+        >
           <label htmlFor="radio1">
             <BsChatLeftText color="white" size={"20px"} />
             <p>Chats</p>
-            <input id="radio1" type="radio"  value="option1" checked={selectedMenu === 'option1'} onChange={handleMenuChange}/>
+            <input
+              id="radio1"
+              type="radio"
+              value="option1"
+              checked={selectedMenu === "option1"}
+              onChange={handleMenuChange}
+            />
           </label>
-        
         </div>
 
-        <div className={`groups ${selectedMenu=='option2' && 'selected-menu'}`}>
-
+        <div
+          className={`groups ${selectedMenu == "option2" && "selected-menu"}`}
+        >
           <label htmlFor="radio2">
             <MdGroups color="white" size={"27px"} />
             <p>Groups</p>
-            <input id="radio2" type="radio"  value="option2" checked={selectedMenu === 'option2'} onChange={handleMenuChange}/>
-          </label>    
-        
+            <input
+              id="radio2"
+              type="radio"
+              value="option2"
+              checked={selectedMenu === "option2"}
+              onChange={handleMenuChange}
+            />
+          </label>
         </div>
-     
-        <div className={`updates ${selectedMenu=='option3' && 'selected-menu'}`}>
-            
+
+        <div
+          className={`updates ${selectedMenu == "option3" && "selected-menu"}`}
+        >
           <label htmlFor="radio3">
             <MdOutlineDownloading color="white" size={"25px"} />
             <p>Updates</p>
-            <input id="radio3" type="radio"  value="option3" checked={selectedMenu === 'option3'} onChange={handleMenuChange}/>
+            <input
+              id="radio3"
+              type="radio"
+              value="option3"
+              checked={selectedMenu === "option3"}
+              onChange={handleMenuChange}
+            />
           </label>
-
         </div>
-        <div className={`add-user ${selectedMenu=='option4' && 'selected-menu'}`} onClick={()=>{searchUserInputRef.current.focus()}}>
-          
+        <div
+          className={`add-user ${selectedMenu == "option4" && "selected-menu"}`}
+          onClick={() => {
+            searchUserInputRef.current.focus();
+          }}
+        >
           <label htmlFor="radio4">
             <RiUserAddLine color="white" size={"22px"} />
             <p>Add</p>
-            <input id="radio4" type="radio"  value="option4" checked={selectedMenu === 'option4'} onChange={handleMenuChange}/>
+            <input
+              id="radio4"
+              type="radio"
+              value="option4"
+              checked={selectedMenu === "option4"}
+              onChange={handleMenuChange}
+            />
           </label>
-    
         </div>
       </div>
 
-      
-  <div ref={createGroupPageRef} style={{display:'none'}}>
-      <CreateGroupPage conversations={conversations} createGroupPageRef={createGroupPageRef} setConversations={setConversations} selectConversation={selectConversation} sortConversations={sortConversations} > </CreateGroupPage>
-  </div>
-
+      <div ref={createGroupPageRef} style={{ display: "none" }}>
+        <CreateGroupPage
+          conversations={conversations}
+          createGroupPageRef={createGroupPageRef}
+          setConversations={setConversations}
+          selectConversation={selectConversation}
+          sortConversations={sortConversations}
+        >
+          {" "}
+        </CreateGroupPage>
+      </div>
     </div>
   );
 }

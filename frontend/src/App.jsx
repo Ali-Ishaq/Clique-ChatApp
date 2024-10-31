@@ -29,9 +29,8 @@ function App() {
   useEffect(() => {
     const persistentLogIn = async () => {
       try {
-
         const response = await fetch(
-          "http://192.168.0.128:3000/user/persistent-login",
+          "https://clique-chat-app-server.vercel.app//user/persistent-login",
           { credentials: "include" }
         );
         const { status, message, data } = await response.json();
@@ -67,7 +66,13 @@ function App() {
 
   return (
     <div className="App">
-      {isTokenChecked ? <RouterProvider router={router} /> : <div className="loadingScreen"><span className="loader"></span></div>}
+      {isTokenChecked ? (
+        <RouterProvider router={router} />
+      ) : (
+        <div className="loadingScreen">
+          <span className="loader"></span>
+        </div>
+      )}
 
       <ToastContainer
         position="top-right"
