@@ -14,7 +14,7 @@ const getUserSocketId = (userId) => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["http://192.168.0.128:5173", "http://192.168.0.128:5173"],
+    origin: ["http://192.168.0.128:5173", "http://192.168.0.128:5173","https://clique-chat-app.vercel.app"],
   },
 });
 
