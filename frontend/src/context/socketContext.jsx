@@ -14,11 +14,14 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const socket = io("https://clique-chat-app-server.vercel.app", {
-        query: {
-          userId: user._id,
-        },
-      });
+      const socket = io(
+        "https://outstanding-mead-aliishaq-5c08db28.koyeb.app",
+        {
+          query: {
+            userId: user._id,
+          },
+        }
+      );
       setSocket(socket);
 
       socket.on("getOnlineUsers", (users) => {

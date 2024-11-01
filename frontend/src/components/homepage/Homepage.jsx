@@ -71,7 +71,7 @@ function Homepage() {
           );
         } else {
           fetch(
-            "https://clique-chat-app-server.vercel.app/messages/get-conversation",
+            "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/get-conversation",
             {
               method: "POST",
               credentials: "include",
@@ -137,7 +137,7 @@ function Homepage() {
   const getConversations = async () => {
     try {
       const response = await fetch(
-        "https://clique-chat-app-server.vercel.app/messages/get-conversations",
+        "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/get-conversations",
         {
           method: "GET",
           credentials: "include",
@@ -215,7 +215,7 @@ function Homepage() {
 
       // getting chat of selected conversation
       const response = await fetch(
-        "https://clique-chat-app-server.vercel.app/messages/get-conversation-messages",
+        "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/get-conversation-messages",
         {
           method: "POST",
           credentials: "include",
@@ -261,7 +261,7 @@ function Homepage() {
         ]);
 
         const res = await fetch(
-          "https://clique-chat-app-server.vercel.app/messages/sendMessage",
+          "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/sendMessage",
           {
             method: "POST",
             credentials: "include",

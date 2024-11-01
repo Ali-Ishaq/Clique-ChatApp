@@ -105,7 +105,7 @@ function Sidebar({
 
       if (!doesConversationExist) {
         const response = await fetch(
-          "https://clique-chat-app-server.vercel.app/messages/create-conversation",
+          "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/create-conversation",
           {
             method: "POST",
             credentials: "include",
@@ -155,7 +155,7 @@ function Sidebar({
   const handleLogOut = async () => {
     try {
       const response = await fetch(
-        "https://clique-chat-app-server.vercel.app/user/logout",
+        "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/user/logout",
         {
           credentials: "include",
         }
