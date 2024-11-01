@@ -162,7 +162,7 @@ function Sidebar({
       );
       const { status, message } = await response.json();
       if (status == "success") {
-        // location.reload();
+        location.reload();
       }
       toast(message);
     } catch (error) {
