@@ -408,7 +408,7 @@ function Sidebar({
             marginTop: "15px",
           }}
         >
-          Creating Grouping
+          Creating Conversation
         </h1>
       </div>
     </div>
