@@ -1,4 +1,4 @@
-# ChatApp
+# Clique (ChatApp)
 
 Welcome to Clique-ChatApp! This application is built using the MERN stack (MongoDB, Express, React, Node.js) and implements real-time communication with Socket.io. This README will guide you through its features .
 
