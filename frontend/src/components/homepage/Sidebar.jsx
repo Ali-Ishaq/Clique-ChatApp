@@ -28,6 +28,10 @@ function Sidebar({
   const [userSearchResult, setUserSearchResult] = useState(null);
   const { socket } = useContext(socketContext);
   const [selectedMenu, setSelectedMenu] = useState("option1");
+  const [
+    isCreateConvesationRequestPending,
+    setIsCreateConvesationRequestPending,
+  ] = useState(false);
 
   const conversationCardContainerRef = useRef();
   const sidebarNavMenuRef = useRef(null);
@@ -104,6 +108,9 @@ function Sidebar({
       });
 
       if (!doesConversationExist) {
+        // Adding the Loader
+        setIsCreateConvesationRequestPending(true);
+
         const response = await fetch(
           "https://outstanding-mead-aliishaq-5c08db28.koyeb.app/messages/create-conversation",
           {
@@ -117,6 +124,11 @@ function Sidebar({
         );
 
         const { status, message, data } = await response.json();
+
+        if (status) {
+          // Removing the Loader
+          setIsCreateConvesationRequestPending(false);
+        }
 
         if (status == "success") {
           setConversations((prev) => [
@@ -296,6 +308,7 @@ function Sidebar({
             ))}
       </div>
 
+      {/* Only Visible for Mobile Screens */}
       <div className="sidebar-navigation-menu" ref={sidebarNavMenuRef}>
         <div
           className={`chats ${selectedMenu == "option1" && "selected-menu"}`}
@@ -364,6 +377,7 @@ function Sidebar({
         </div>
       </div>
 
+      {/* Group creation page ,visible when navigate to "create group" from sidebar dropdown */}
       <div ref={createGroupPageRef} style={{ display: "none" }}>
         <CreateGroupPage
           conversations={conversations}
@@ -374,6 +388,28 @@ function Sidebar({
         >
           {" "}
         </CreateGroupPage>
+      </div>
+
+      {/* Loading screen , while the conversation is being created i.e. when create-conversation api is called and waiting for response*/}
+      <div
+        className="create-conversation-loader"
+        style={
+          isCreateConvesationRequestPending
+            ? { display: "flex" }
+            : { display: "none" }
+        }
+      >
+        <div className="loader"></div>
+        <h1
+          style={{
+            color: "white",
+            fontSize: "16px",
+            fontWeight: "400",
+            marginTop: "15px",
+          }}
+        >
+          Creating Grouping
+        </h1>
       </div>
     </div>
   );

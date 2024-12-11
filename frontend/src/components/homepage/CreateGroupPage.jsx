@@ -209,7 +209,14 @@ function CreateGroupPage({
           onChange={handleGroupNameChange}
         />
         <button onClick={createGroup} disabled={isRequestPending}>
-          Create
+          {!isRequestPending ? (
+            "Create"
+          ) : (
+            <div
+              style={{ width: "20px", height: "20px" }}
+              className="loader2"
+            ></div>
+          )}
         </button>
       </div>
     </div>

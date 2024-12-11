@@ -462,6 +462,9 @@
             border-radius: 7px;
             font-size: 13px;
             transition: 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           button:active {
             scale: 0.9;
@@ -471,6 +474,21 @@
 
       .sidebar-navigation-menu {
         display: none;
+      }
+      .create-conversation-loader{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: #252837;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        padding-top: 15px;
       }
     }
 
