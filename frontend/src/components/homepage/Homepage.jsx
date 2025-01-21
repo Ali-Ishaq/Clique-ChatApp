@@ -30,6 +30,7 @@ function Homepage() {
     // Checks wheter the correct chat is open
 
     if (liveMessage) {
+      
       if (
         messages &&
         liveMessage.conversationId == selectedCard.conversationId
@@ -97,7 +98,7 @@ function Homepage() {
                     profile: "",
                     conversationName:
                       data.participants.length > 1
-                        ? groupName
+                        ? data.groupName
                         : data.participants[0].username,
                     userId:
                       data.participants.length > 1
